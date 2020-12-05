@@ -32,7 +32,7 @@ class Theme {
     string nom
 }
 
-class Utilisateur {
+class User {
     string nom
     string prenom
     string pseudo
@@ -50,13 +50,13 @@ class Commentaire {
 Jeu "0,N" -right- "1,1" Editeur : a créé
 Jeu "0,N" -up- "1,1" Theme : appartient
 Jeu "0,N" --left-- "0,N" Mecanique : de type
-Jeu "0,N" -- "1,1" Utilisateur : a ajouté
-Jeu "0,N" --left-- "0,N" Utilisateur : a acheté
-(Jeu, Utilisateur) . Achat
+Jeu "0,N" -- "1,1" User : a ajouté
+Jeu "0,N" --left-- "0,N" User : a acheté
+(Jeu, User) . Achat
 'Jeu "0,N" -- "0,N" Utilisateur : a commenté
 '(Jeu, Utilisateur) . Commentaire
 Jeu "1,1" -- "1,N" Commentaire
-Commentaire "0,N" -right- "1,1" Utilisateur
+Commentaire "0,N" -right- "1,1" User
 'Utilisateur "0,N" -- "1,1" JeuUtilisateur: a acheté
 'JeuUtilisateur "1,1" -- "0,N" Jeu : appartient
 
