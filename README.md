@@ -41,6 +41,33 @@ Dans cette version du projet vous trouverez :
 - Les classes pour ajouter des données aléatoires sont données (voir le répertoire `database/seeders`)
 
 
+
+### Les commandes de départ
+
+- `composer install`
+- `php artisan migrate:fresh`
+- `php artisan db:seed`
+- `php artisan key:generate`
+
+Pour le front
+
+- `npm install`
+- `npm run dev`
+
+Si vous avez des erreurs a la compilation du front (npm run install), vous devez :
+
+- Supprimer le répertoire `node_modules`
+- Supprimer le fichier `package-lock.json`
+
+et refaire les deux commandes précédentes 
+
+
+- `npm install`
+- `npm run dev`
+
+ 
+
+
 ### Votre travail
 
 A partir de cette version initiale, vous devez réaliser les tickets de l'étape 1.
