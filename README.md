@@ -72,7 +72,7 @@ et refaire les deux commandes précédentes
 
 Après avoir lancer l'application, l'énoncé sera disponible à l'adresse http://localhost:8000/enonce.
 
-A partir de cette version initiale, vous devez réaliser les questions données dans le jalon 1.
+A partir de cette version initiale, vous devez réaliser les questions données dans le jalon 1 puis le jalon 2, jalon 3 et projet.
 
 <ol>
 <li>Le code de l'application (backend).</li>
@@ -90,4 +90,4 @@ A partir de cette version initiale, vous devez réaliser les questions données 
 </ol>
 
 
-BONNE CHANCE !
+BON COURAGE !
