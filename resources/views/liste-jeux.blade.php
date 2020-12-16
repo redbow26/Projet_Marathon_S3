@@ -6,46 +6,46 @@
     </head>
     <body>
         <div>
+            @if(Auth::check())
             <div>
-                @if ($errors->any())
-                    <div>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                    @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-                <h2>Créer un jeux: </h2>
-                <form action="{{route('jeux.store')}}" method="POST">
-                    {!! csrf_field() !!}
-                    <div>
-                        <label for="nom">Nom :</label>
-                        <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
-                    </div>
+                    <h2>Créer un jeux: </h2>
+                    <form action="{{route('jeux.store')}}" method="POST">
+                        {!! csrf_field() !!}
+                        <div>
+                            <label for="nom">Nom :</label>
+                            <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
+                        </div>
 
-                    <div>
-                        <label for="description">Description:</label>
-                        <input type="text" id="description" name="description" value="{{ old('description') }}">
-                    </div>
+                        <div>
+                            <label for="description">Description:</label>
+                            <input type="text" id="description" name="description" value="{{ old('description') }}">
+                        </div>
 
-                    <div>
-                        <label for="theme">Thème:</label>
-                        <input type="text" id="theme" name="theme" value="{{ old('theme') }}">
-                    </div>
+                        <div>
+                            <label for="theme">Thème:</label>
+                            <input type="text" id="theme" name="theme" value="{{ old('theme') }}">
+                        </div>
 
-                    <div>
-                        <label for="editeur">Editeur:</label>
-                        <input type="text" id="editeur" name="editeur" value=""{{ old('editeur') }}">
-                    </div>
-                </form>
-
-                <div class="button">
-                    <button type="submit">Créer le jeux</button>
-                </div>
+                        <div>
+                            <label for="editeur">Editeur:</label>
+                            <input type="text" id="editeur" name="editeur" value=""{{ old('editeur') }}">
+                        </div>
+                        <div class="button">
+                            <button type="submit">Créer le jeux</button>
+                        </div>
+                    </form>
             </div>
-
+            @endif
 
             <h1 style="text-align:center">Liste des Jeux</h1>
             <br>
