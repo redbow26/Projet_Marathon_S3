@@ -248,3 +248,4 @@ storage/*.key
 # Local History for Visual Studio Code
 .history/
 .idea/
+public/js/app.js
