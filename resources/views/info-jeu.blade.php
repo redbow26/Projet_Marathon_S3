@@ -1,7 +1,6 @@
 <html lang="fr">
     <body>
         <h1 style="align-items: center"> Détails du jeu </h1>
-
         <ul>
             <li>
                 <p>  {{$jeu -> url_media}} </p>
@@ -16,6 +15,5 @@
                 <p> <strong> Durée </strong>: {{$jeu -> duree}} </p>
             </li>
         </ul>
-
     </body>
 </html>
