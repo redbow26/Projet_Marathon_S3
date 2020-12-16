@@ -94,7 +94,47 @@
             @endauth
         </div>
         <div class="col-6 text-right">
-            <a href="{{ URL::route('jeux.index', $sort) }}">Trié par nom @if ($filter !== null)<i class="fas  @if ($sort == 0)fa-sort-down @else fa-sort-up @endif "></i> @endif</a>
+            @if($sort !== 'asc')
+            <a href="{{ URL::route('jeux.index', ['sort' => 'asc', "editeurs" => $editeurs, "themes" => $themes, "mecaniques" => $mecaniques]) }}">Trié par nom croissant</a>
+            @endif
+            @if($sort !== 'desc')
+                    <a href="{{ URL::route('jeux.index', ['sort' => 'desc',  "editeurs" => $editeurs, "themes" => $themes, "mecaniques" => $mecaniques]) }}">Trié par nom decroissant</a>
+            @endif
+
+                <div>
+                    @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <h2>Créer un jeux: </h2>
+                    <form action="{{route('jeux.index')}}" method="GET">
+                        <div>
+                            <label for="editeurs">Editeurs (separer les editeurs avec des ","):</label>
+                            <input type="text" id="editeurs" name="editeurs" value="{{ old('editeurs') }}">
+                        </div>
+
+                        <div>
+                            <label for="themes">Thèmes (separer les thèmes avec des ","):</label>
+                            <input type="text" id="themes" name="themes" value="{{ old('themes') }}">
+                        </div>
+
+                        <div>
+                            <label for="mecaniques">Mécaniques (separer les mécaniques avec des ","):</label>
+                            <input type="text" id="mecaniques" name="mecaniques" value="{{ old('mecaniques') }}">
+                        </div>
+
+                        <div class="button">
+                            <button type="submit">Rechercher</button>
+                        </div>
+                    </form>
+                </div>
+
         </div>
     </div>
     <div class="row ">
