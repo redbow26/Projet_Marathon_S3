@@ -16,7 +16,7 @@
             <p>Regle du jeu : {{$jeu -> regles}}</p>
             <div></div>
             <a href="{{route('jeux.show',['jeux'=>$jeu -> id])}}" ><button>Retourner à la page du jeu</button></a>
-            <a href="jeux"><button>Retourner à la liste de tous les jeux</button></a>
+            <a href="../jeux"><button>Retourner à la liste de tous les jeux</button></a>
         </li>
     @endforeach
 </body>
