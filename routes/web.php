@@ -22,7 +22,7 @@ Route::get('/enonce', function () {
     return view('enonce.index');
 });
 
-Route::resource('/liste-jeux', 'App\Http\Controllers\Jeux');
+Route::resource('/jeux', 'App\Http\Controllers\Jeux');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
