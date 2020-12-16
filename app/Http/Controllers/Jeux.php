@@ -23,7 +23,7 @@ class Jeux extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,7 +34,26 @@ class Jeux extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'nom' => 'required',
+                'description'  => 'required',
+                'theme' => 'required',
+                'editeur' => 'required',
+            ]
+        );
+
+        $jeu = new Jeu;
+
+        $jeu->nom = $request->nom;
+        $jeu->description = $request->description;
+        $jeu->theme = $request->theme;
+        $jeu->editeur = $request->editeur;
+
+        $jeu->save();
+        return redirect()->route('jeux.index');
+
     }
 
     /**
