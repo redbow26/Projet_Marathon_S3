@@ -25,3 +25,6 @@ Route::get('/enonce', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/regle', [\App\Http\Controllers\RegleJeuController::class, 'index'])->name('regle.index');
+Route::get('/regle/{id}', [\App\Http\Controllers\RegleJeuController::class, 'show'])->name('regle.show')->where('id','[0-9]+');
