@@ -21,5 +21,37 @@
         </ul>
         <a href="{{route('regle.show', ['id' => $jeu->id])}}"><button>Voir les regles</button></a>
         <a href="{{route('jeux.index')}}"><button>Retour a la liste</button></a>
+
+        @auth
+            <div>
+                @if ($errors->any())
+                    <div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <h3>Ajouter un commentaire :</h3>
+                <form action="{{route('commentaire_ajout')}}" method="POST">
+                    {!! csrf_field() !!}
+                    <div>
+                        <label for="commentaire">Commentaire :</label>
+                        <input type="text" id="commentaire" name="commentaire" value="{{ old('commentaire') }}">
+                    </div>
+
+                    <div>
+                        <label for="note">Note :</label>
+                        <input type="number" id="note" name="note" value="{{ old('note') }}">
+                    </div>
+
+                    <div class="button">
+                        <button type="submit">envoyer</button>
+                    </div>
+                </form>
+            </div>
+        @endauth
     </body>
 </html>
