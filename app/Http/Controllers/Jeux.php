@@ -11,9 +11,23 @@ class Jeux extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($sort = null)
     {
-        return view('liste-jeux', ['jeux' => Jeu::all()]);
+        $filter = null;
+        if($sort !== null){
+            if($sort){
+                $jeux = Jeu::all()->sortBy('nom');
+            } else{
+                $jeux = Jeu::all()->sortByDesc('nom');
+            }
+            $sort = !$sort;
+            $filter = true;
+        } else{
+            $jeux = Jeu::all();
+            $sort = true;
+        }
+        Log::info(url($jeux[0]->url_media));
+        return view('jeu.index', ['jeux' => $jeux, 'sort' => intval($sort), 'filter' => $filter]);
     }
 
     /**
