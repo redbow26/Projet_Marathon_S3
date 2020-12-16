@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Liste des Jeux</title>
-    </head>
-    <body>
-        <div>
-            @if(Auth::check())
-            <div>
+@extends("base")
+
+@section('title', 'Liste des jeux')
+
+@section('content')
+
+    <h1 class="text-center">Tous les jeux de medusatheque</h1>
+    <div class="row">
+        <div class="col-6 text-left">
+            @auth
+                <div>
                     @if ($errors->any())
                         <div>
                             <ul>
@@ -44,49 +45,37 @@
                             <button type="submit">Créer le jeux</button>
                         </div>
                     </form>
-            </div>
-            @endif
-
-            <h1 style="text-align:center">Liste des Jeux</h1>
-            <br>
-            @foreach ($jeux as $i)
-                <li>
-                    <p>
-                        Nom :
-                        @if($i -> nom != null)
-                            {{$i -> nom}}
-                        @else
-                            PAS DE DONNEE
-                        @endif
-                    </p>
-                    <p>
-                        Thème :
-                        @if($i -> theme -> nom != null)
-                            {{$i -> theme -> nom}}
-                        @else
-                            PAS DE DONNEE
-                        @endif
-                    </p>
-                    <p>
-                        Durée d'une partie :
-                        @if($i -> duree != null)
-                            {{$i -> duree}}
-                        @else
-                            PAS DE DONNEE
-                        @endif
-                    </p>
-                    <p>
-                        Nombre de joueurs :
-                        @if($i-> nombre_joueurs != null)
-                            {{$i-> nombre_joueurs}}
-                        @else
-                            PAS DE DONNEE
-                        @endif
-                        </p>
-                </li>
-                <a href="{{route('jeux.show',['jeux'=>$i -> id])}}"><button>+</button></a>
-            <br>
-            @endforeach
+                </div>
+            @endauth
         </div>
-    </body>
-</html>
+        <div class="col-6 text-right">
+            <a href="{{ URL::route('jeu.index', $sort) }}">Trié par nom @if ($filter !== null)<i class="fas  @if ($sort == 0)fa-sort-down @else fa-sort-up @endif "></i> @endif</a>
+        </div>
+    </div>
+    <div class="row ">
+
+
+        @foreach ($jeux as $jeu)
+            <div class="col-4">
+                <div class="card">
+                    <img src="{{url($jeu->url_media)}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $jeu->nom }}</h5>
+                        <p class="card-text">
+                            {{ \Illuminate\Support\Str::limit($jeu->description, 50, $end='...') }}<br/>
+                        <hr>
+                        {{ $jeu->theme->nom }}
+                        <hr>
+                        durée : {{ $jeu->duree }}
+                        <hr>
+                        Nombre de joueur : {{ $jeu->nombre_joueurs }}
+
+                        <a href="{{ URL::route('jeu.show', $jeu->id) }}" class="btn btn-primary">Plus d'info</a>
+                    </div>
+                </div>
+            </div>
+
+    @endforeach
+
+
+@endsection
