@@ -100,4 +100,18 @@ class Jeux extends Controller
     {
         //
     }
+
+
+    public function randomGames($nb){
+        $jeux=[];
+
+        while (count($jeux)!=$nb){
+            $id_last=Jeu::all()->last()->id;
+            $id=rand(1,$id_last);
+            $jeu=Jeu::find($id);
+            if (isset($jeu) && !in_array($jeu,$jeux))
+                $jeux[]=$jeu;
+        }
+        return view('jeuxAleatoire',['data'=>$jeux]);
+    }
 }
