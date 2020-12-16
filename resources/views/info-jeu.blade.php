@@ -5,7 +5,11 @@
             <li>
                 <p>  {{$jeu -> url_media}} </p>
                 <p> <strong> Titre du jeux </strong>: {{$jeu -> nom}} </p>
-                <p> <strong> La (les) mécanique(s) </strong>: {{$jeu -> mecanique -> nom}} </p>
+                <p> <strong> La (les) mécanique(s) </strong>
+                @foreach($jeu -> mecaniques as $mecanique)
+                    {{$mecanique->nom}}
+                    @endforeach
+                </p>
                 <p> <strong> Descriptions </strong>: {{$jeu -> nom}} </p>
                 <p> <strong> Thème </strong>: {{$jeu -> theme -> theme}} </p>
                 <p> <strong> Catégorie </strong>: {{$jeu -> categorie}} </p>
