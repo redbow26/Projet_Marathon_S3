@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commentaire;
 use App\Models\Jeu;
+use Illuminate\Support\Facades\DB;
 
 class Jeux extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -77,7 +81,28 @@ class Jeux extends Controller
      */
     public function show($id)
     {
-        return view('info-jeu', ['jeu' => Jeu::find($id)]);
+        $jeu=Jeu::find($id);
+        $jeu->moyenne = $this->moyenneNotes($id);
+
+
+        $jeux=Jeu::where('theme_id',$jeu -> theme_id) -> get();
+        foreach ($jeux as $j)
+            $j -> moyenne = $this -> moyenneNotes($j -> id);
+        $jeux =$jeux ->sortBy([['moyenne','desc']])->toArray();
+
+
+        $index = 0;
+        for ($i = 0;$i<count($jeux);$i++){
+            if ($jeux[$i] ["id"]== $jeu -> id){
+                $index = $i;
+                break;
+            }
+        }
+
+        $jeu->classement= $index+1;
+
+
+        return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux]);
     }
 
     /**
@@ -126,5 +151,15 @@ class Jeux extends Controller
                 $jeux[]=$jeu;
         }
         return view('jeuxAleatoire',['data'=>$jeux]);
+    }
+
+    public function moyenneNotes($id){
+        $jeu=Jeu::find($id);
+        $notes= $jeu -> commentaires ->pluck('note');
+        if (count($notes->toArray()) != 0)
+            $jeu -> moyenne=round(array_sum($notes->toArray())/count($notes->toArray()),PHP_ROUND_HALF_UP);
+        else
+            $jeu -> moyenne = 0;
+        return $jeu->moyenne;
     }
 }
