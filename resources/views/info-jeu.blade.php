@@ -17,5 +17,7 @@
             </li>
         </ul>
 
+        <button><a href="{{routes('jeux.index')}}"> Retourner à la liste des jeux </a></button>
+
     </body>
 </html>
