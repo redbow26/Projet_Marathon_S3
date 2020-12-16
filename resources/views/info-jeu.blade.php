@@ -1,6 +1,39 @@
 <html lang="fr">
     <body>
         <h1 style="align-items: center"> Détails du jeu </h1>
+
+        <!-- Statistique du jeu -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {{$note = 0}}
+                    @foreach($jeu -> $commentaires as $commentaire)
+                        {{$note += $commentaire->note}}
+                    @endforeach
+                    {{$moyenne = $note/\count($jeu->commentaires)}}
+                </div>
+                <div class="col">
+                    {{$jeu->commentaires->max()->note}}
+                </div>
+                <div class="col">
+                    {{$jeu->commentaires->min()->note}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{count($jeu->commentaires)}}
+                </div>
+                <div class="col">
+                    {{\App\Models\Commentaire::all()->count()}}
+                </div>
+                <div class="col">
+                    3 of 3
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Détails du jeux -->
         <ul>
             <li>
                 <p>  {{$jeu -> url_media}} </p>
@@ -19,9 +52,11 @@
                 <p> <strong> Durée </strong>: {{$jeu -> duree}} </p>
             </li>
         </ul>
+
         <a href="{{route('regle.show', ['id' => $jeu->id])}}"><button>Voir les regles</button></a>
         <a href="{{route('jeux.index')}}"><button>Retour a la liste</button></a>
 
+        <!-- Section ajout de commentaire -->
         @auth
             <div>
                 @if ($errors->any())
