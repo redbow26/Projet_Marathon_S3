@@ -43,7 +43,7 @@
                         @endif
                         </p>
                 </li>
-                <button href="{{route('jeux.show',['id'=>$i-> id])}}">+</button>
+                <button><a href="{{route('jeux.show',['jeux'=>$i -> id])}}">+</a></button>
             <br>
             @endforeach
         </div>
