@@ -16,7 +16,7 @@
             <p>Regle du jeu : {{$jeu -> regles}}</p>
             <div></div>
             <a href="enonce" ><button>Retourner à la page du jeu</button></a>
-            <a href="liste-jeux"><button>Retourner à la liste de tous les jeux</button></a>
+            <a href="jeux"><button>Retourner à la liste de tous les jeux</button></a>
         </li>
     @endforeach
 </body>
