@@ -8,15 +8,15 @@
     <title>Règle du jeu</title>
 </head>
 <body>
+    <h1>Les différentes règles des jeux</h1>
     @foreach($jeux as $jeu)
         <li>
             <p>ID du jeu : {{$jeu -> id}}</p>
             <p>Nom du jeu : {{$jeu -> nom}}</p>
             <p>Regle du jeu : {{$jeu -> regles}}</p>
-            <p></p>
-            <a href="enonce" >Retourner à la page du jeu</a>
-            <p></p>
-            <a href="liste-jeux">Retourner à la liste de tous les jeux</a>
+            <div></div>
+            <a href="enonce" ><button>Retourner à la page du jeu</button></a>
+            <a href="liste-jeux"><button>Retourner à la liste de tous les jeux</button></a>
         </li>
     @endforeach
 </body>
