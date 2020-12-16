@@ -13,9 +13,9 @@
         <p>Nom du jeu : {{$jeux -> nom}}</p>
         <p>Regle du jeu : {{$jeux -> regles}}</p>
         <p></p>
-        <a href="enonce" >Retourner à la page du jeu</a>
+        <a href="../enonce" >Retourner à la page du jeu</a>
         <p></p>
-        <a href="liste-jeu">Retourner à la liste de tous les jeux</a>
+        <a href="../liste-jeux">Retourner à la liste de tous les jeux</a>
     </li>
 </body>
 </html>

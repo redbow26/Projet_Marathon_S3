@@ -16,7 +16,7 @@
             <p></p>
             <a href="enonce" >Retourner à la page du jeu</a>
             <p></p>
-            <a href="liste-jeu">Retourner à la liste de tous les jeux</a>
+            <a href="liste-jeux">Retourner à la liste de tous les jeux</a>
         </li>
     @endforeach
 </body>
