@@ -36,7 +36,7 @@ class Jeux extends Controller
      */
     public function create()
     {
-
+        //Chercher l'intégralité des thèmes et afficher le formulaire dans une nouvelle view
     }
 
     /**
