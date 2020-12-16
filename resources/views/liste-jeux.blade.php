@@ -43,7 +43,7 @@
                         @endif
                         </p>
                 </li>
-                <button href="">+</button>
+                <button href="info-jeu">+</button>
             <br>
             @endforeach
         </div>
