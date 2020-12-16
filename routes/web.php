@@ -26,6 +26,8 @@ Route::get('/enonce', function () {
 
 Route::resource('/jeux', 'App\Http\Controllers\Jeux');
 
+Route::post('/commentaire_ajout',[\App\Http\Controllers\CommentaireController::class,'ajout'])->name('ajout')->middleware('auth');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
