@@ -8,7 +8,7 @@
                 <p> <strong> La (les) mécanique(s) </strong>
                 @foreach($jeu -> mecaniques as $mecanique)
                     {{$mecanique->nom}}
-                    @endforeach
+                @endforeach
                 </p>
                 <p> <strong> Descriptions </strong>: {{$jeu -> nom}} </p>
                 <p> <strong> Thème </strong>: {{$jeu -> theme -> theme}} </p>
