@@ -35,8 +35,19 @@
                 @endif
 
                 <h3>Ajouter un commentaire :</h3>
+                    @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 <form action="{{route('commentaire_ajout')}}" method="POST">
                     {!! csrf_field() !!}
+                    <input type="hidden" id="jeu_id" name="jeu_id" value="{{$jeu->id}}">
+
                     <div>
                         <label for="commentaire">Commentaire :</label>
                         <input type="text" id="commentaire" name="commentaire" value="{{ old('commentaire') }}">
@@ -44,7 +55,7 @@
 
                     <div>
                         <label for="note">Note :</label>
-                        <input type="number" id="note" name="note" value="{{ old('note') }}">
+                        <input type="number" min="0" max="5" id="note" name="note" value="{{ old('note') }}">
                     </div>
 
                     <div class="button">
@@ -53,5 +64,14 @@
                 </form>
             </div>
         @endauth
+        <h3>Commentaires :</h3>
+        @foreach ($jeu->commentaires as $comm)
+            <br>
+            <span>{{ $comm->commentaire }}</span>
+            <span>{{ $comm->note }}/5</span>
+            <span>{{ $comm->duree }}</span>
+            <br>
+        @endforeach
+
     </body>
 </html>

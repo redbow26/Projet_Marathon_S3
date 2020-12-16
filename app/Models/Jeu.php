@@ -36,6 +36,6 @@ class Jeu extends Model {
     }
 
     function commentaires() {
-        return $this->hasMany(Commentaire::class);
+        return $this->hasMany(Commentaire::class, 'jeu_id');
     }
 }
