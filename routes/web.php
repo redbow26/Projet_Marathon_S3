@@ -34,3 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/regle', [\App\Http\Controllers\RegleJeuController::class, 'index'])->name('regle.index');
 Route::get('/regle/{id}', [\App\Http\Controllers\RegleJeuController::class, 'show'])->name('regle.show')->where('id','[0-9]+');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/collection', function () {
+    return view('collection');
+})->name('collection');

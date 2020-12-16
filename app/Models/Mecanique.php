@@ -13,7 +13,7 @@ class Mecanique extends Model
 
     protected $fillable = ['nom'];
 
-    function jeux() {
+    public function jeux() {
         return $this->belongsToMany(Jeu::class, 'avec_mecaniques');
     }
 }
