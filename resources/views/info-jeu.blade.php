@@ -19,5 +19,7 @@
                 <p> <strong> Durée </strong>: {{$jeu -> duree}} </p>
             </li>
         </ul>
+        <a href="{{route('regle.show', ['id' => $jeu->id])}}"><button>Voir les regles</button></a>
+        <a href="{{route('jeux.index')}}"><button>Retour a la liste</button></a>
     </body>
 </html>
