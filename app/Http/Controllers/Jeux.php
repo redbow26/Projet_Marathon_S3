@@ -2,31 +2,105 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Editeur;
 use App\Models\Jeu;
+use App\Models\Mecanique;
+use App\Models\Theme;
+use Illuminate\Http\Request;
 
 class Jeux extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
+     * @param null $sort
      * @return \Illuminate\Http\Response
      */
-    public function index($sort = null)
+    private function fusion($tab1, $tab2) {
+        $temp = [];
+        for ($i = 0; $i < count($tab2); $i++)
+            $tab2[$i] = $tab2[$i]->id;
+
+        foreach($tab1 as $t) {
+            if (in_array($t->id, $tab2))
+                $temp[] = $t;
+        }
+        return $temp;
+    }
+
+    public function index(Request $request)
     {
-        $filter = null;
+        $sort = $request->query('sort', null);
+        $editeurs = $request->query('editeurs', null) !== null ?
+            explode(",", str_replace("+", " ", $request->query('editeurs')))
+            : null;
+        $themes = $request->query('themes', null) !== null ?
+            explode(",", str_replace("+", " ", $request->query('themes')))
+            : null;
+        $mecaniques = $request->query('mecaniques', null) !== null ?
+            explode(",", str_replace("+", " ", $request->query('mecaniques')))
+            : null;
+
+        $jeuxEdi = [];
+        $jeuxTh = [];
+        $jeuxMe = [];
+
+        if($editeurs !== null) {
+            foreach ($editeurs as $e) {
+                $editeur = Editeur::where("nom", "LIKE", "%".trim($e)."%")->get();
+                foreach ($editeur->pluck('id') as $id)
+                    foreach (Jeu::where("editeur_id", $id)->get() as $jeu)
+                        $jeuxEdi[] = $jeu;
+            }
+        }
+        if($themes !== null) {
+            foreach ($themes as $t) {
+                $theme = Theme::where("nom", "LIKE", "%".trim($t)."%")->get();
+                foreach ($theme->pluck('id') as $id)
+                    foreach (Jeu::where("theme_id", $id)->get() as $jeu)
+                        $jeuxTh[] = $jeu;
+            }
+        }
+        if($mecaniques !== null) {
+            foreach ($mecaniques as $m) {
+                $mecanique = Mecanique::where("nom", "LIKE", "%".trim($m)."%")->get()[0];
+                foreach ($mecanique->jeux as $jeu)
+                    $jeuxMe[] = $jeu;
+            }
+            $jeuxMe = array_unique($jeuxMe);
+        }
+
+        if ($editeurs == null && $themes == null && $mecaniques == null)
+            $jeux = Jeu::all();
+        else if ($editeurs == null && $themes == null && $mecaniques !== null)
+            $jeux = $jeuxMe;
+        else if ($editeurs == null && $themes !== null && $mecaniques == null)
+            $jeux = $jeuxTh;
+        else if ($editeurs == null && $themes !== null && $mecaniques !== null)
+            $jeux = $this->fusion($jeuxTh, $jeuxMe);
+        else if ($editeurs !== null && $themes == null && $mecaniques == null)
+            $jeux = $jeuxEdi;
+        else if ($editeurs !== null && $themes == null && $mecaniques !== null)
+            $jeux = $this->fusion($jeuxEdi, $jeuxMe);
+        else if ($editeurs !== null && $themes !== null && $mecaniques == null)
+            $jeux = $this->fusion($jeuxEdi, $jeuxTh);
+        else if ($editeurs !== null && $themes !== null && $mecaniques !== null)
+            $jeux = $this->fusion($jeuxEdi, $this->fusion($jeuxTh, $jeuxMe));
+
+        $jeux = collect($jeux);
+
         if($sort !== null){
-            if($sort){
-                $jeux = Jeu::all()->sortBy('nom');
-            } else{
+            if ($sort == "asc") {
+                $jeux = $jeux->sortBy("nom");
+            }
+            else {
                 $jeux = Jeu::all()->sortByDesc('nom');
             }
-            $sort = !$sort;
-            $filter = true;
-        } else{
-            $jeux = Jeu::all();
-            $sort = true;
         }
-        return view('liste-jeux', ['jeux' => $jeux, 'sort' => intval($sort), 'filter' => $filter]);
+
+        return view('liste-jeux', ['jeux' => $jeux, 'sort' => $sort, "editeurs" => $request->query("editeurs"), "themes" => $request->query("themes"), "mecaniques" => $request->query('mecaniques')]);
     }
 
     /**
@@ -36,7 +110,7 @@ class Jeux extends Controller
      */
     public function create()
     {
-
+        //Chercher l'intégralité des thèmes et afficher le formulaire dans une nouvelle view
     }
 
     /**
@@ -77,7 +151,28 @@ class Jeux extends Controller
      */
     public function show($id)
     {
-        return view('info-jeu', ['jeu' => Jeu::find($id)]);
+        $jeu=Jeu::find($id);
+        $jeu->moyenne = $this->moyenneNotes($id);
+
+
+        $jeux=Jeu::where('theme_id',$jeu -> theme_id) -> get();
+        foreach ($jeux as $j)
+            $j -> moyenne = $this -> moyenneNotes($j -> id);
+        $jeux =$jeux ->sortBy([['moyenne','desc']])->toArray();
+
+
+        $index = 0;
+        for ($i = 0;$i<count($jeux);$i++){
+            if ($jeux[$i] ["id"]== $jeu -> id){
+                $index = $i;
+                break;
+            }
+        }
+
+        $jeu->classement= $index+1;
+
+
+        return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux]);
     }
 
     /**
@@ -126,5 +221,15 @@ class Jeux extends Controller
                 $jeux[]=$jeu;
         }
         return view('jeuxAleatoire',['data'=>$jeux]);
+    }
+
+    public function moyenneNotes($id){
+        $jeu=Jeu::find($id);
+        $notes= $jeu -> commentaires ->pluck('note');
+        if (count($notes->toArray()) != 0)
+            $jeu -> moyenne=round(array_sum($notes->toArray())/count($notes->toArray()),PHP_ROUND_HALF_UP);
+        else
+            $jeu -> moyenne = 0;
+        return $jeu->moyenne;
     }
 }
