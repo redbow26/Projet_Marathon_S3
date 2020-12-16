@@ -39259,8 +39259,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/redbow/Documents/Cours/Marathon/ludotheque/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/redbow/Documents/Cours/Marathon/ludotheque/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/Rekku/Bureau/JourneeMarathon/ludotheque/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/Rekku/Bureau/JourneeMarathon/ludotheque/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
