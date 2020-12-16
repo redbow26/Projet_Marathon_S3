@@ -81,4 +81,13 @@ class Jeux extends Controller
     {
         //
     }
+
+
+    public function randomGames($nb){
+        $jeux=[];
+
+        while (count($jeux)!=5){
+
+        }
+    }
 }

@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/randomGames/{nb}',[\App\Http\Controllers\Jeux::class,'randomGames'])->name('randomGames')->middleware('auth');
 
 Route::get('/enonce', function () {
     return view('enonce.index');
