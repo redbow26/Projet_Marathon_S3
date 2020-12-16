@@ -26,8 +26,7 @@ class Jeux extends Controller
             $jeux = Jeu::all();
             $sort = true;
         }
-        Log::info(url($jeux[0]->url_media));
-        return view('jeu.index', ['jeux' => $jeux, 'sort' => intval($sort), 'filter' => $filter]);
+        return view('liste-jeux', ['jeux' => $jeux, 'sort' => intval($sort), 'filter' => $filter]);
     }
 
     /**

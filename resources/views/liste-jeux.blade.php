@@ -1,8 +1,5 @@
-@extends("base")
 
 @section('title', 'Liste des jeux')
-
-@section('content')
 
     <h1 class="text-center">Tous les jeux de medusatheque</h1>
     <div class="row">
@@ -49,33 +46,29 @@
             @endauth
         </div>
         <div class="col-6 text-right">
-            <a href="{{ URL::route('jeu.index', $sort) }}">Trié par nom @if ($filter !== null)<i class="fas  @if ($sort == 0)fa-sort-down @else fa-sort-up @endif "></i> @endif</a>
+            <a href="{{ URL::route('jeux.index', $sort) }}">Trié par nom @if ($filter !== null)<i class="fas  @if ($sort == 0)fa-sort-down @else fa-sort-up @endif "></i> @endif</a>
         </div>
     </div>
     <div class="row ">
 
-
         @foreach ($jeux as $jeu)
             <div class="col-4">
                 <div class="card">
-                    <img src="{{url($jeu->url_media)}}" class="card-img-top" alt="...">
+                    <img src="{{$jeu->url_media}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ $jeu->nom }}</h5>
                         <p class="card-text">
                             {{ \Illuminate\Support\Str::limit($jeu->description, 50, $end='...') }}<br/>
                         <hr>
-                        {{ $jeu->theme->nom }}
+                        <span>{{ $jeu->theme->nom }}</span>
                         <hr>
-                        durée : {{ $jeu->duree }}
+                        <span>durée : {{ $jeu->duree }}</span>
                         <hr>
-                        Nombre de joueur : {{ $jeu->nombre_joueurs }}
-
-                        <a href="{{ URL::route('jeu.show', $jeu->id) }}" class="btn btn-primary">Plus d'info</a>
+                        <span>Nombre de joueur : {{ $jeu->nombre_joueurs }}</span>
+                        <hr>
+                        <a href="{{ URL::route('jeux.show', $jeu->id) }}" class="btn btn-primary">Plus d'info</a>
                     </div>
                 </div>
             </div>
+        @endforeach
 
-    @endforeach
-
-
-@endsection
