@@ -4,7 +4,6 @@
 @endsection
 
 @section('content')
-    <h1>Ma super page d'accueil</h1>
 
     <div class="texteMilieu">
         <h1> LA MEDUSATHEQUE</h1>
