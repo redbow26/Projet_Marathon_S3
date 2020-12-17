@@ -289,4 +289,19 @@ class Jeux extends Controller
             $jeu -> moyenne = 0;
         return $jeu->moyenne;
     }
+
+    public function bestGames()
+    {
+        $jeux = Jeu::all();
+        foreach ($jeux as $jeu) {
+            $jeu->moyenne = $this->moyenneNotes($jeu->id);
+        }
+        $jeux->sortByDesc('moyenne');
+        $meilleurs = [];
+        for ($i = 0; $i < 5; $i++) {
+            $meilleurs[] = $jeux[$i];
+        }
+        return view('bestGames', ['meilleurs' => $meilleurs]);
+    }
 }
+
