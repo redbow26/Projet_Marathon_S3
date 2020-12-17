@@ -94,6 +94,11 @@ h3{
     margin-top: 10px;
 }
 
-#trie{text-align: center;
+#trie{
+    text-align: center;
+}
 
+#noteMoyenne{
+
+    color: red
 }
