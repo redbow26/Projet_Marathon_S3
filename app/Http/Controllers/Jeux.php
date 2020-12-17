@@ -50,9 +50,8 @@ class Jeux extends Controller
         if($editeurs !== null) {
             foreach ($editeurs as $e) {
                 $editeur = Editeur::where("nom", "LIKE", "%".trim($e)."%")->get();
-                foreach ($editeur->pluck('id') as $id)
-                    foreach (Jeu::where("editeur_id", $id)->get() as $jeu)
-                        $jeuxEdi[] = $jeu;
+                foreach ($editeur->jeux as $jeu)
+                    $jeuxEdi[] = $jeu;
             }
         }
         if($themes !== null) {
