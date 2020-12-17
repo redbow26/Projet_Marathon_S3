@@ -1,14 +1,7 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+@extends('layouts.navBar')
+@section('style')
     <link rel="stylesheet" type="text/css" href="{{asset('css/info-jeu.css')}}">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Détails du jeu</title>
-</head>
-    <body>@extends('layouts.navBar')
+@endsection
 
     @section('content')
         <div class="fond">
@@ -169,35 +162,39 @@
             </div>
             <div id="com1">
                 @if ($sort == 'asc')
-                    @foreach ($jeu->commentaires->sortBy('date_com') as $comm)
-                        <br>
-                        <span>{{ $comm->commentaire }}</span>
-                        <span>{{ $comm->note }}/5</span>
-                        <span>{{ $comm->duree }}</span>
-                        <span>{{ $comm->date_com }}</span>
-                        <br>
-                    @endforeach
+                    <table>
+                        @foreach ($jeu->commentaires->sortBy('date_com') as $comm)
+                            <tr id="cadre">
+                                <td>{{$comm->user->name}}</td>
+                                <td>{{ $comm->commentaire }}</td>
+                                <td>{{ $comm->note }}/5</td>
+                                <td>{{ $comm->date_com }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
                 @elseif ($sort == 'desc')
-                    @foreach ($jeu->commentaires->sortByDesc('date_com') as $comm)
-                        <br>
-                        <span>{{ $comm->commentaire }}</span>
-                        <span>{{ $comm->note }}/5</span>
-                        <span>{{ $comm->duree }}</span>
-                        <span>{{ $comm->date_com }}</span>
-                        <br>
-                    @endforeach
+                    <table>
+                        @foreach ($jeu->commentaires->sortByDesc('date_com') as $comm)
+                            <tr id="cadre">
+                                <td>{{$comm->user->name}}</td>
+                                <td>{{ $comm->commentaire }}</td>
+                                <td>{{ $comm->note }}/5</td>
+                                <td>{{ $comm->date_com }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
                 @else
-                    @foreach ($jeu->commentaires as $comm)
-                        <br>
-                        <span>{{ $comm->commentaire }}</span>
-                        <span>{{ $comm->note }}/5</span>
-                        <span>{{ $comm->duree }}</span>
-                        <br>
-                    @endforeach
+                    <table>
+                        @foreach ($jeu->commentaires as $comm)
+                                <tr id="cadre">
+                                    <td>{{$comm->user->name}}</td>
+                                    <td>{{ $comm->commentaire }}</td>
+                                    <td>{{ $comm->note }}/5</td>
+                                    <td>{{ $comm->date_com }}</td>
+                                </tr>
+                        @endforeach
+                    </table>
                 @endif
             </div>
         </div>
-
-
-    </body>
-</html>
+    @endsection
