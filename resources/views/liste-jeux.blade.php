@@ -1,7 +1,11 @@
+@extends('layouts.navBar')
+
+@section('content')
 
 @section('title', 'Liste des jeux')
 
     <h1 class="text-center">Tous les jeux de medusatheque</h1>
+    <!-- Creation d'un jeu -->
     <div class="row">
         <div class="col-6 text-left">
             @auth
@@ -111,21 +115,21 @@
                         </div>
                     @endif
 
-                    <h2>Créer un jeux: </h2>
+                    <h2>Filtres : </h2>
                     <form action="{{route('jeux.index')}}" method="GET">
                         <div>
-                            <label for="editeurs">Editeurs (separer les editeurs avec des ","):</label>
-                            <input type="text" id="editeurs" name="editeurs" value="{{ old('editeurs') }}">
+                            <label for="editeurs">Editeurs :</label>
+                            <input type="text" id="editeurs" name="editeurs" value="{{ old('editeurs') }}" placeholder="editeur1,editeur2">
                         </div>
 
                         <div>
-                            <label for="themes">Thèmes (separer les thèmes avec des ","):</label>
-                            <input type="text" id="themes" name="themes" value="{{ old('themes') }}">
+                            <label for="themes">Thèmes :</label>
+                            <input type="text" id="themes" name="themes" value="{{ old('themes') }}" placeholder="thème1,thème2">
                         </div>
 
                         <div>
-                            <label for="mecaniques">Mécaniques (separer les mécaniques avec des ","):</label>
-                            <input type="text" id="mecaniques" name="mecaniques" value="{{ old('mecaniques') }}">
+                            <label for="mecaniques">Mécaniques :</label>
+                            <input type="text" id="mecaniques" name="mecaniques" value="{{ old('mecaniques') }}" placeholder="mecanique1,mecanique2">
                         </div>
 
                         <div class="button">
@@ -159,3 +163,4 @@
             </div>
         @endforeach
 
+@endsection

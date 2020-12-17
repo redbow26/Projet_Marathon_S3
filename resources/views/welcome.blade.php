@@ -13,6 +13,12 @@
     </div>
     <img id="page-profile" src="{{asset('images/photo-profil.jpg')}}" alt="ma photo de profil">
 
+@extends('layouts.navBar')
+
+@section('content')
+<h1>Ma super page d'accueil</h1>
+
+
 
 
 @auth
@@ -20,5 +26,9 @@
 
 @endauth
 
+
 </body>
 </html>
+
+@endsection
+
