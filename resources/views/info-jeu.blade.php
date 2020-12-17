@@ -162,31 +162,38 @@
             </div>
             <div id="com1">
                 @if ($sort == 'asc')
-                    @foreach ($jeu->commentaires->sortBy('date_com') as $comm)
-                        <br>
-                        <span>{{ $comm->commentaire }}</span>
-                        <span>{{ $comm->note }}/5</span>
-                        <span>{{ $comm->duree }}</span>
-                        <span>{{ $comm->date_com }}</span>
-                        <br>
-                    @endforeach
+                    <table>
+                        @foreach ($jeu->commentaires->sortBy('date_com') as $comm)
+                            <tr id="cadre">
+                                <td>{{$comm->user->name}}</td>
+                                <td>{{ $comm->commentaire }}</td>
+                                <td>{{ $comm->note }}/5</td>
+                                <td>{{ $comm->date_com }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
                 @elseif ($sort == 'desc')
-                    @foreach ($jeu->commentaires->sortByDesc('date_com') as $comm)
-                        <br>
-                        <span>{{ $comm->commentaire }}</span>
-                        <span>{{ $comm->note }}/5</span>
-                        <span>{{ $comm->duree }}</span>
-                        <span>{{ $comm->date_com }}</span>
-                        <br>
-                    @endforeach
+                    <table>
+                        @foreach ($jeu->commentaires->sortByDesc('date_com') as $comm)
+                            <tr id="cadre">
+                                <td>{{$comm->user->name}}</td>
+                                <td>{{ $comm->commentaire }}</td>
+                                <td>{{ $comm->note }}/5</td>
+                                <td>{{ $comm->date_com }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
                 @else
-                    @foreach ($jeu->commentaires as $comm)
-                        <br>
-                        <span>{{ $comm->commentaire }}</span>
-                        <span>{{ $comm->note }}/5</span>
-                        <span>{{ $comm->duree }}</span>
-                        <br>
-                    @endforeach
+                    <table>
+                        @foreach ($jeu->commentaires as $comm)
+                                <tr id="cadre">
+                                    <td>{{$comm->user->name}}</td>
+                                    <td>{{ $comm->commentaire }}</td>
+                                    <td>{{ $comm->note }}/5</td>
+                                    <td>{{ $comm->date_com }}</td>
+                                </tr>
+                        @endforeach
+                    </table>
                 @endif
             </div>
         </div>
