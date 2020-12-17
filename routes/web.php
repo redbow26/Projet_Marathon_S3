@@ -19,6 +19,7 @@ Route::get('/', function () {
 })->name('accueil');
 
 Route::get('/randomGames/{nb}',[\App\Http\Controllers\Jeux::class,'randomGames'])->name('randomGames')->middleware('auth');
+Route::get('/bestGames/{nb}',[\App\Http\Controllers\Jeux::class,'bestGames'])->name('bestGames')->middleware('auth');
 
 Route::get('/enonce', function () {
     return view('enonce.index');
