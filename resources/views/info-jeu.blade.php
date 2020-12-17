@@ -19,6 +19,50 @@
                 <p> <strong> Durée </strong>: {{$jeu -> duree}} </p>
             </li>
         </ul>
+
+        <?php
+        $som = 0;
+        $nbAchat= 0;
+        $haut = 0;
+        $bas = $haut;
+        ?>
+
+        @foreach($jeu->acheteurs as $achat)
+            <?php
+            $som += $achat->prix;
+            $nbAchat ++;
+            ?>
+            @if($achat->prix > $haut)
+                <?php
+                $haut = $achat;
+                ?>
+            @endif
+
+            @if($achat -> prix < $bas)
+                <?php
+                $bas = $achat;
+                ?>
+            @endif
+        @endforeach
+
+        <div id="tarifs">
+            <ul>
+                <li>Prix le plus haut : {{$haut }}</li>
+                <li>Prix le plus bas : {{$bas }}</li>
+                <li>Nombre utilisateur qui possède le jeu : {{$nbAchat }}</li>
+                <li>Prix moyen : {{$som/$nbAchat}}</li>
+                <li>Nombre maximal d'utilisateur: {{$userT}}</li>
+
+            </ul>
+        </div>
+        <p></p>
+        <a href="{{route('regle.show', ['id' => $jeu->id])}}"><button>Voir les regles</button></a>
+        <a href="{{route('jeux.index')}}"><button>Retour a la liste</button></a>
+        </li>
+
+
+
+
         <a href="{{route('regle.show', ['id' => $jeu->id])}}"><button>Voir les regles</button></a>
         <a href="{{route('jeux.index')}}"><button>Retour a la liste</button></a>
 
@@ -53,5 +97,7 @@
                 </form>
             </div>
         @endauth
+
+
     </body>
 </html>

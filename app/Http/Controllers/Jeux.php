@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jeu;
+use App\Models\User;
 
 class Jeux extends Controller
 {
@@ -77,7 +78,8 @@ class Jeux extends Controller
      */
     public function show($id)
     {
-        return view('info-jeu', ['jeu' => Jeu::find($id)]);
+        return view('info-jeu', ['jeu' => Jeu::find($id), 'userT' => User::count()]);
+
     }
 
     /**

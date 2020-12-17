@@ -65,7 +65,6 @@
                             <input type="number" id="nombre_joueur" name="nombre_joueur" step="1" min="1" max="100"  value=""{{ old('nombre_joueur') }}">
                         </div>
 
-
                         <div>
                             <label for="categorie">Categorie:</label>
                             <input type="list" list="categorie" id="nombre_joueur" name="nombre_joueur" min="1" max="100"  value=""{{ old('nombre_joueur') }}">
