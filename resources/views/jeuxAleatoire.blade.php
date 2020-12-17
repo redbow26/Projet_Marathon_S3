@@ -6,7 +6,7 @@
 @section('content')
 
     <div id="contain">
-        <h1>Les jeux randoms</h1>
+        <h1>Les jeux random</h1>
         <div id="a">
             @foreach($data as $jeu)
                 <p>{{$jeu->url_media}}</p>
