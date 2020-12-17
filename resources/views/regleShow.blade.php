@@ -9,14 +9,12 @@
     <title>Règle du jeu</title>
 </head>
 <body>
-    <h1>La règles du jeu : {{$jeux -> nom}}</h1>
-    <li>
+    <h1>La règles du jeu :</h1>
+
         <p>ID du jeu : {{$jeux -> id}}</p>
         <p>Nom du jeu : {{$jeux -> nom}}</p>
         <p>Regle du jeu : {{$jeux -> regles}}</p>
-        <p></p>
-        <a href="{{route('jeux.show', ['jeux' => $jeux -> id])}}"><button>Retourner à la page du jeu</button></a>
-        <a href="../jeux"><button>Retourner à la liste de tous les jeux</button></a>
-    </li>
+
+
 </body>
 </html>

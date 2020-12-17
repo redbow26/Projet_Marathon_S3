@@ -7,6 +7,7 @@ use App\Models\Jeu;
 use App\Models\Mecanique;
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class Jeux extends Controller
 {
@@ -175,7 +176,7 @@ class Jeux extends Controller
         $jeu->classement= $index+1;
 
 
-        return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux]);
+        return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux, 'userT' => User::count()]);
     }
 
     /**
