@@ -114,7 +114,7 @@
                         </div>
                     @endif
 
-                    <h2>Créer un jeux: </h2>
+                    <h2>Filtres : </h2>
                     <form action="{{route('jeux.index')}}" method="GET">
                         <div>
                             <label for="editeurs">Editeurs (separer les editeurs avec des ","):</label>
