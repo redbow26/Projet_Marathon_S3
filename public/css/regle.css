@@ -1,5 +1,31 @@
+body{
+    background: #a4d7ee;
+}
+.fond{
+    background: white;
+    margin-left:20% ;
+    margin-right:20% ;
+    margin-top: 10%;
+    margin-bottom: -100px;
+    padding: 2%;
+}
+
 h1{
     text-align: center;
+    font-family: Raleway;
+    font-size: 40px;
+}
+
+h2{
+    text-align: center;
+    font-family: Raleway;
+    font-size: 35px;
+}
+
+
+p{
+    font-family: openSans;
+    font-size: 30px;
 }
 
 .encadrement{
