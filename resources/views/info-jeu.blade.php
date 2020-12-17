@@ -23,14 +23,46 @@
                 @if(count($jeu ->commentaires) > 0)
                     <div class="row">
                         <div class="col">
-                            <p >Note : {{$jeu->moyenne}} /5</p>
+                            @if ($jeu->moyenne <= 1)
+                                <style type="text/css">#noteMoyenne{color:rgb(255,0,0);}</style>
+                            @elseif ($jeu->moyenne <= 2)
+                                <style type="text/css">#noteMoyenne{color:rgb(192,64,0);}</style>
+                            @elseif ($jeu->moyenne <= 3)
+                                <style type="text/css">#noteMoyenne{color:rgb(128,128,0);}</style>
+                            @elseif ($jeu->moyenne <= 4)
+                                <style type="text/css">#noteMoyenne{color:rgb(64,192,0);}</style>
+                            @else
+                                <style type="text/css">#noteMoyenne{color:rgb(0,255,0);}</style>
+                            @endif
+                            <p>Note :<span id="noteMoyenne">{{$jeu->moyenne}} </span>/5</p>
                         </div>
                         <div class="col">
-                            <p >La meilleur note :
-                                {{$jeu->commentaires->min()->note}}</p>
+                            @if ($jeu->commentaires->min()->note <= 1)
+                                <style type="text/css">#pireNote{color:rgb(255,0,0);}</style>
+                            @elseif ($jeu->commentaires->min()->note <= 2)
+                                <style type="text/css">#pireNote{color:rgb(192,64,0);}</style>
+                            @elseif ($jeu->commentaires->min()->note <= 3)
+                                <style type="text/css">#pireNote{color:rgb(128,128,0);}</style>
+                            @elseif ($jeu->commentaires->min()->note <= 4)
+                                <style type="text/css">#pireNote{color:rgb(64,192,0);}</style>
+                            @else
+                                <style type="text/css">#pireNote{color:rgb(0,255,0);}</style>
+                            @endif
+                            <p >La meilleur note : <span id="pireNote">{{$jeu->commentaires->min()->note}}</span> </p>
                         </div>
                         <div class="col">
-                            <p>La pire note : {{$jeu->commentaires->max()->note}}</p>
+                            @if ($jeu->commentaires->max()->note <= 1)
+                                <style type="text/css">#meilleurNote{color:rgb(255,0,0);}</style>
+                            @elseif ($jeu->commentaires->max()->note <= 2)
+                                <style type="text/css">#meilleurNote{color:rgb(192,64,0);}</style>
+                            @elseif ($jeu->commentaires->max()->note <= 3)
+                                <style type="text/css">#meilleurNote{color:rgb(128,128,0);}</style>
+                            @elseif ($jeu->commentaires->max()->note <= 4)
+                                <style type="text/css">#meilleurNote{color:rgb(64,192,0);}</style>
+                            @else
+                                <style type="text/css">#meilleurNote{color:rgb(0,255,0);}</style>
+                            @endif
+                            <p>La pire note : <span id="meilleurNote">{{$jeu->commentaires->max()->note}}</span></p>
                         </div>
                     </div>
                     <div class="row">
@@ -41,7 +73,16 @@
                             <p> Nombre total de commentaires : {{\App\Models\Commentaire::all()->count()}}</p>
                         </div>
                         <div class="col">
-                            <p>Ce jeu est classé : {{$jeu->classement}} / {{count($jeux)}}</p>
+                            @if($jeu->classement <= 3)
+                                <p>Ce jeu est classé :  <i class="fas fa-fire" style="color: red; font-size: 200px"></i> {{$jeu->classement}} / {{count($jeux)}}</p>
+                            @elseif($jeu -> classement >3 && $jeu -> classement <8)
+                                <p>Ce jeu est classé :<img src="public/images/flame.jpg" alt="" style="width: 100px"> {{$jeu->classement}} / {{count($jeux)}}</p>
+                            @elseif($jeu -> classement > 7)
+                                <p>Ce jeu est classé :<img src="public/images/flame.jpg" alt="" style="width: 50px"> {{$jeu->classement}} / {{count($jeux)}}</p>
+                            @else
+                                <p>Ce jeu est classé : {{$jeu->classement}} / {{count($jeux)}}</p>
+                            @endif
+
                         </div>
                     </div>
                 @else

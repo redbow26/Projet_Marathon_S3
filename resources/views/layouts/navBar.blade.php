@@ -17,7 +17,7 @@
     <header>
 
         <!-- Image and text -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: rgb(130,91,246); background: linear-gradient(0deg, rgba(130,91,246,0) 0%, rgba(130,91,246,0.1474790599833683) 8%, rgba(34,193,195,1) 96%); ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{route('accueil')}}">Medusathèque</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
