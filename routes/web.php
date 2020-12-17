@@ -25,6 +25,8 @@ Route::get('/enonce', function () {
 });
 
 Route::resource('/jeux', 'App\Http\Controllers\Jeux');
+Route::post('/achat', [\App\Http\Controllers\AchatController::class,'store'])->name('achat.store')->middleware('auth');
+Route::post('/destroy', [\App\Http\Controllers\AchatController::class,'destroy'])->name('achat.destroy')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

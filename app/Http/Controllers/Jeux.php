@@ -6,6 +6,10 @@ use App\Models\Jeu;
 
 class Jeux extends Controller
 {
+    public static function find($jeu_id)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
