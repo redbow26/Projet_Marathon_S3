@@ -225,7 +225,26 @@ class Jeux extends Controller
             }
         }
 
+        $jeux_classement = Jeu::all();
+        $nbCom_jeux=[];
+        foreach ($jeux_classement as $jc)
+            $nbCom_jeux[$jc -> id]=count($jc -> commentaires);
+        arsort($nbCom_jeux);
+
+
+
+        $index2 = 0;
+        foreach($nbCom_jeux as $nbCom_jeu) {
+            $index2++;
+            if ($nbCom_jeu == count($jeu -> commentaires)) {
+                break;
+            }
+        }
+
+
+
         $jeu->classement= $index+1;
+        $jeu ->classement_com = $index2;
 
 
         return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux, 'sort'=> $sort, 'userT' => User::count()]);
