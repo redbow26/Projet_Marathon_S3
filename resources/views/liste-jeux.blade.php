@@ -1,3 +1,6 @@
+@extends('layouts.navBar')
+
+@section('content')
 
 @section('title', 'Liste des jeux')
 
@@ -159,3 +162,4 @@
             </div>
         @endforeach
 
+@endsection

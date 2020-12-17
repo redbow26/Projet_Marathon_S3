@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('accueil');
 
 Route::get('/randomGames/{nb}',[\App\Http\Controllers\Jeux::class,'randomGames'])->name('randomGames')->middleware('auth');
 

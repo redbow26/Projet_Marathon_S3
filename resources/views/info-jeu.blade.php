@@ -1,5 +1,6 @@
-<html lang="fr">
-    <body>
+@extends('layouts.navBar')
+
+@section('content')
         <h1 style="align-items: center"> Détails du jeu </h1>
 
         <!-- Statistique du jeu -->
@@ -198,5 +199,4 @@
 
 
 
-    </body>
-</html>
+@endsection
