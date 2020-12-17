@@ -4,6 +4,16 @@
 @endsection
 
     @section('content')
+        @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="fond">
             <h1> Détails du jeu </h1>
             <p> {{$jeu -> url_media}}</p>
@@ -72,6 +82,7 @@
                     @if($found == null)
                     <form action="{{route('achat.store')}}" method="POST">
                         {!! csrf_field() !!}
+                        <input type="hidden"  name="id" value="{{$jeu->id}}">
                         <div class="dateA">
                             <label for="lieu">Lieu :</label>
                             <input type="text" id="lieu" name="lieu" value="{{ old('lieu') }}">
@@ -87,7 +98,8 @@
                             {!! csrf_field() !!}
                             <input type="hidden"  name="id" value="{{$jeu->id}}">
 
-                            <div class="button">
+
+                            <div class="dateA" id="acheter1">
                                 <button type="submit">Retirer de sa collection</button>
                             </div>
                         </form>
@@ -113,26 +125,7 @@
             <!-- Section ajout de commentaire -->
             @auth
                 <div>
-                    @if ($errors->any())
-                        <div>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <h3>Ajouter un commentaire :</h3>
-                        @if ($errors->any())
-                            <div>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                     <form action="{{route('commentaire_ajout')}}" method="POST">
                         {!! csrf_field() !!}
                         <input type="hidden" id="jeu_id" name="jeu_id" value="{{$jeu->id}}">
