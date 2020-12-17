@@ -24,7 +24,7 @@ class CommentaireController extends Controller
         $com->note = $request->note;
         $com->user_id = Auth::user()->id;
         $com->jeu_id = $request->jeu_id;
-        $com->date_com = new \Datetime('now');
+        $com->date_com = new Datetime('now');
 
         $com->save();
         return redirect()->route('jeux.show', $request->jeu_id);
