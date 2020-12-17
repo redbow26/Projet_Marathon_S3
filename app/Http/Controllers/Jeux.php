@@ -154,8 +154,9 @@ class Jeux extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $sort = $request->query('sort', null);
         $jeu=Jeu::find($id);
         $jeu->moyenne = $this->moyenneNotes($id);
 
@@ -177,9 +178,7 @@ class Jeux extends Controller
         $jeu->classement= $index+1;
 
 
-        return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux, 'userT' => User::count()]);
-
-        $jeu -> trier = $this->trierCommentaires($request);
+        return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux, 'sort'=> $sort, 'userT' => User::count()]);
 
     }
 
@@ -239,24 +238,5 @@ class Jeux extends Controller
         else
             $jeu -> moyenne = 0;
         return $jeu->moyenne;
-    }
-
-    public function trierCommentaires(Request $request){
-        $sort = $request->query('sort', null);
-        $commentaires = Commentaire::all();
-
-        if($sort !== null){
-            if ($sort == "asc") {
-                $commentaires = $commentaires->sortBy("date_com");
-            }
-            else{
-                $sort = null;
-            }
-            $sort = !$sort;
-            $filter = true;
-        } else{
-            $commentaires = Commentaire::all();
-            $sort = true;
-        }
     }
 }

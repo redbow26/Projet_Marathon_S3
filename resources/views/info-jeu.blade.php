@@ -161,14 +161,42 @@
         @endauth
 
         <h3>Commentaires :</h3>
-        <p>Trier par : <a href="{{route('commentaireTrier', ['sort' => 'asc', "commentaires" => $jeu ->commentaires]) }}"><button>plus récent</button></a></p>
-        @foreach ($jeu->commentaires as $comm)
-            <br>
-            <span>{{ $comm->commentaire }}</span>
-            <span>{{ $comm->note }}/5</span>
-            <span>{{ $comm->duree }}</span>
-            <br>
-        @endforeach
+        @if($sort !== 'asc')
+            <a href="{{ URL::route('jeux.show', [$jeu->id, 'sort' => 'asc']) }}">Trié par date croissante</a>
+        @endif
+        @if($sort !== 'desc')
+            <a href="{{ URL::route('jeux.show', [$jeu->id, 'sort' => 'desc']) }}">Trié par date decroissante</a>
+        @endif
+
+        @if ($sort == 'asc')
+            @foreach ($jeu->commentaires->sortBy('date_com') as $comm)
+                <br>
+                <span>{{ $comm->commentaire }}</span>
+                <span>{{ $comm->note }}/5</span>
+                <span>{{ $comm->duree }}</span>
+                <span>{{ $comm->date_com }}</span>
+                <br>
+            @endforeach
+        @elseif ($sort == 'desc')
+            @foreach ($jeu->commentaires->sortByDesc('date_com') as $comm)
+                <br>
+                <span>{{ $comm->commentaire }}</span>
+                <span>{{ $comm->note }}/5</span>
+                <span>{{ $comm->duree }}</span>
+                <span>{{ $comm->date_com }}</span>
+                <br>
+            @endforeach
+        @else
+            @foreach ($jeu->commentaires as $comm)
+                <br>
+                <span>{{ $comm->commentaire }}</span>
+                <span>{{ $comm->note }}/5</span>
+                <span>{{ $comm->duree }}</span>
+                <br>
+            @endforeach
+        @endif
+
+
 
     </body>
 </html>
