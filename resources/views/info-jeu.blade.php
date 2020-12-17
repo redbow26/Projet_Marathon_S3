@@ -160,7 +160,9 @@
                 </form>
             </div>
         @endauth
+
         <h3>Commentaires :</h3>
+        <p>Trier par : <a href="{{route('commentaireTrier', ['sort' => 'asc', "commentaires" => $jeu ->commentaires]) }}"><button>plus récent</button></a></p>
         @foreach ($jeu->commentaires as $comm)
             <br>
             <span>{{ $comm->commentaire }}</span>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commentaire;
 use App\Models\Editeur;
 use App\Models\Jeu;
 use App\Models\Mecanique;
@@ -175,6 +176,9 @@ class Jeux extends Controller
         $jeu->classement= $index+1;
 
 
+        $jeu -> trier = $this->trierCommentaires($request);
+
+
         return view('info-jeu', ['jeu' => $jeu, 'jeux' => $jeux]);
     }
 
@@ -234,5 +238,24 @@ class Jeux extends Controller
         else
             $jeu -> moyenne = 0;
         return $jeu->moyenne;
+    }
+
+    public function trierCommentaires(Request $request){
+        $sort = $request->query('sort', null);
+        $commentaires = Commentaire::all();
+
+        if($sort !== null){
+            if ($sort == "asc") {
+                $commentaires = $commentaires->sortBy("date_com");
+            }
+            else{
+                $sort = null;
+            }
+            $sort = !$sort;
+            $filter = true;
+        } else{
+            $commentaires = Commentaire::all();
+            $sort = true;
+        }
     }
 }

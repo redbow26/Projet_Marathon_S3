@@ -25,6 +25,8 @@ Route::get('/enonce', function () {
 });
 
 Route::resource('/jeux', 'App\Http\Controllers\Jeux');
+Route::get('/jeuxTrier',['App\Http\Controllers\Jeux','show'])->name('commentaireTrier');
+
 Route::post('/achat', [\App\Http\Controllers\AchatController::class,'store'])->name('achat.store')->middleware('auth');
 Route::post('/destroy', [\App\Http\Controllers\AchatController::class,'destroy'])->name('achat.destroy')->middleware('auth');
 
