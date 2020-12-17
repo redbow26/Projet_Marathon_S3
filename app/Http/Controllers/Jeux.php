@@ -58,10 +58,11 @@ class Jeux extends Controller
         if($themes !== null) {
             foreach ($themes as $t) {
                 $theme = Theme::where("nom", "LIKE", "%".trim($t)."%")->get();
-                foreach ($theme->pluck('id') as $id)
-                    foreach (Jeu::where("theme_id", $id)->get() as $jeu)
+                foreach ($theme as $th)
+                    foreach ($th->jeux as $jeu)
                         $jeuxTh[] = $jeu;
             }
+
         }
         if($mecaniques !== null) {
             foreach ($mecaniques as $m) {
@@ -98,11 +99,6 @@ class Jeux extends Controller
             else {
                 $jeux = Jeu::all()->sortByDesc('nom');
             }
-            $sort = !$sort;
-            $filter = true;
-        } else{
-            $jeux = Jeu::all();
-            $sort = true;
         }
 
         return view('liste-jeux', ['jeux' => $jeux, 'sort' => $sort, "editeurs" => $request->query("editeurs"), "themes" => $request->query("themes"), "mecaniques" => $request->query('mecaniques')]);
