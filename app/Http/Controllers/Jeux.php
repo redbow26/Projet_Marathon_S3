@@ -42,10 +42,22 @@ class Jeux extends Controller
         $mecaniques = $request->query('mecaniques', null) !== null ?
             explode(",", str_replace("+", " ", $request->query('mecaniques')))
             : null;
+        $nbJoueurs = $request->query('nombre_joueurs', null) !== null ?
+            explode(",", str_replace("+", " ", $request->query('nombre_joueurs')))
+            : null;
+        $duree = $request->query('duree', null) !== null ?
+            explode(",", str_replace("+", " ", $request->query('duree')))
+            : null;
+        $langue = $request->query('langue', null) !== null ?
+            explode(",", str_replace("+", " ", $request->query('langue')))
+            : null;
 
         $jeuxEdi = [];
         $jeuxTh = [];
         $jeuxMe = [];
+        $jeuxNb = [];
+        $jeuxDu = [];
+        $jeuxLa = [];
 
         if($editeurs !== null) {
             foreach ($editeurs as $e) {
@@ -72,6 +84,33 @@ class Jeux extends Controller
             $jeuxMe = array_unique($jeuxMe);
         }
 
+        if($nbJoueurs !== null) {
+            foreach ($nbJoueurs as $nb) {
+                $jeu = Jeu::where("nombre_joueurs", ">=", $nb)->get();
+                foreach ($jeu as $j)
+                    $jeuxNb[] = $j;
+            }
+            $jeuxNb = array_unique($jeuxNb);
+        }
+
+        if($duree !== null) {
+            foreach ($duree as $du) {
+                $jeu = Jeu::where("duree", "=", $du)->get();
+                foreach ($jeu as $j)
+                    $jeuxDu[] = $j;
+            }
+            $jeuxDu = array_unique($jeuxDu);
+        }
+
+        if($langue !== null && $langue[0] !== "null") {
+            foreach ($langue as $la) {
+                $jeu = Jeu::where("langue", "=", $la)->get();
+                foreach ($jeu as $j)
+                    $jeuxLa[] = $j;
+            }
+            $jeuxLa = array_unique($jeuxLa);
+        }
+
         if ($editeurs == null && $themes == null && $mecaniques == null)
             $jeux = Jeu::all();
         else if ($editeurs == null && $themes == null && $mecaniques !== null)
@@ -89,6 +128,18 @@ class Jeux extends Controller
         else if ($editeurs !== null && $themes !== null && $mecaniques !== null)
             $jeux = $this->fusion($jeuxEdi, $this->fusion($jeuxTh, $jeuxMe));
 
+        if ($nbJoueurs !== null) {
+            $jeux = $this->fusion($jeux, $jeuxNb);
+        }
+
+        if ($duree !== null) {
+            $jeux = $this->fusion($jeux, $jeuxDu);
+        }
+
+        if ($langue !== null && $langue[0] !== "null") {
+            $jeux = $this->fusion($jeux, $jeuxLa);
+        }
+
         $jeux = collect($jeux);
 
         if($sort !== null){
@@ -100,7 +151,11 @@ class Jeux extends Controller
             }
         }
 
-        return view('liste-jeux', ['jeux' => $jeux, 'sort' => $sort, "editeurs" => $request->query("editeurs"), "themes" => $request->query("themes"), "mecaniques" => $request->query('mecaniques')]);
+        return view('liste-jeux', ['jeux' => $jeux, 'sort' => $sort, "editeurs" => $request->query("editeurs"),
+            "themes" => $request->query("themes"), "mecaniques" => $request->query('mecaniques'),
+            "nbJoueurs" => $request->query('nombre_joueurs', null),
+            "duree" => $request->query('duree', null),
+            "langue" => $request->query('langue', null)]);
     }
 
     /**

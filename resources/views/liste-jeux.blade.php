@@ -98,22 +98,19 @@
         </div>
         <div class="col-6 text-right">
             @if($sort !== 'asc')
-            <a href="{{ URL::route('jeux.index', ['sort' => 'asc', "editeurs" => $editeurs, "themes" => $themes, "mecaniques" => $mecaniques]) }}">Trié par nom croissant</a>
+            <a href="{{ URL::route('jeux.index', ['sort' => 'asc', "editeurs" => $editeurs, "themes" => $themes, "mecaniques" => $mecaniques,
+            "nbJoueurs" => $nbJoueurs,
+            "duree" => $duree,
+            "langue" => $langue])}}">Trié par nom croissant</a>
             @endif
             @if($sort !== 'desc')
-                    <a href="{{ URL::route('jeux.index', ['sort' => 'desc',  "editeurs" => $editeurs, "themes" => $themes, "mecaniques" => $mecaniques]) }}">Trié par nom decroissant</a>
+                    <a href="{{ URL::route('jeux.index', ['sort' => 'desc',  "editeurs" => $editeurs, "themes" => $themes, "mecaniques" => $mecaniques,
+                    "nbJoueurs" => $nbJoueurs,
+                    "duree" => $duree,
+                    "langue" => $langue]) }}">Trié par nom decroissant</a>
             @endif
 
                 <div>
-                    @if ($errors->any())
-                        <div>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
 
                     <h2>Filtres : </h2>
                     <form action="{{route('jeux.index')}}" method="GET">
@@ -132,6 +129,25 @@
                             <input type="text" id="mecaniques" name="mecaniques" value="{{ old('mecaniques') }}" placeholder="mecanique1,mecanique2">
                         </div>
 
+                        <div>
+                            <label for="nombre_joueurs">Nombre joueurs :</label>
+                            <input type="number" name="nombre_joueurs" value="{{ old('nombre_joueurs') }}" placeholder="editeur1">
+                        </div>
+
+                        <div>
+                            <label for="duree">Durée :</label>
+                            <input type="text" name="duree" value="{{ old('duree') }}" placeholder="duree,duree">
+                        </div>
+
+                        <div>
+                            <label for="langue">Langue :</label>
+                            <select name="langue">
+                                <option value="null">Tous</option>
+                                <option value="Fr">Français</option>
+                                <option value="En">Anglais</option>
+                            </select>
+                        </div>
+
                         <div class="button">
                             <button type="submit">Rechercher</button>
                         </div>
@@ -141,6 +157,10 @@
         </div>
     </div>
     <div class="row ">
+
+        @if(count($jeux) == 0)
+            <div>Pas de jeux trouver</div>
+        @endif
 
         @foreach ($jeux as $jeu)
             <div class="col-4">
