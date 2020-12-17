@@ -25,7 +25,7 @@ class AchatController extends Controller
         $jeux->acheteurs()->attach(Auth::id(),[
             'lieu'=>$request->lieu,
             'prix'=>$request->prix,
-            'date_achat'=> new DateTime('now')]);
+            'date_achat'=> new \DateTime('now')]);
         $jeux->save();
 
         return redirect()->route('jeux.show', $request->id);
