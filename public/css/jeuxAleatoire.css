@@ -1,0 +1,36 @@
+body{
+    background: #a4d7ee;
+    font-family: openSans;
+}
+
+h1{
+    text-align: center;
+    font-family: Raleway;
+    padding-top: 20px;
+}
+
+#a{
+    margin-top: 50px;
+}
+
+#contain{
+    background: white;
+    margin-left:20% ;
+    margin-right:20% ;
+    margin-top: -25px;
+    margin-bottom: -10px;
+    padding: 2%;
+}
+
+#but{
+    text-align: center;
+}
+
+button {
+    border-radius:12px 0 12px 0;
+    border: none;
+    background: #a4d7ee;
+    color: #525252;
+    font:bold 12px Verdana;
+    padding:8px 4px 8px 4px;
+}
