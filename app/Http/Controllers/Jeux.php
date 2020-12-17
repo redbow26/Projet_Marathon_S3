@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 
 class Jeux extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -98,6 +96,11 @@ class Jeux extends Controller
             else {
                 $jeux = Jeu::all()->sortByDesc('nom');
             }
+            $sort = !$sort;
+            $filter = true;
+        } else{
+            $jeux = Jeu::all();
+            $sort = true;
         }
 
         return view('liste-jeux', ['jeux' => $jeux, 'sort' => $sort, "editeurs" => $request->query("editeurs"), "themes" => $request->query("themes"), "mecaniques" => $request->query('mecaniques')]);
