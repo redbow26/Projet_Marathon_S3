@@ -22,7 +22,7 @@
 
 
 @auth
-    <a href="{{Route('randomGames',5)}}"><button class="button"> Nous vous proposons 5 jeux </br> aléatoire du moment </button></a>
+    <a href="{{Route('randomGames',5)}}"><button class="button"> Nous vous proposons 5 jeux aléatoire du moment</button></a>
 
 @endauth
 
